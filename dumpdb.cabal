@@ -19,10 +19,8 @@ executable dumpdb
   main-is:             Main.hs
   -- other-modules:       
   -- other-extensions:    
+  ghc-options:         -O2
   build-depends:       base >=4.8 && <4.9
-                     , transformers
-                     , utf8-string
-
                      , bytestring
                      , text
                      , resourcet
