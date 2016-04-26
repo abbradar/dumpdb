@@ -6,12 +6,12 @@ import qualified Data.Conduit.List as C
 import Data.Conduit.Binary
 import qualified Data.Aeson as JSON
 import Database.Persist.Sql
-import Database.Persist.ODBC
+import Database.Persist.Postgresql
 
 import MyDatabase
 
 connection :: ConnectionString
-connection = "dsn=PostgreSQL;database=shlomo;"
+connection = ""
 
 outFile :: FilePath
 outFile = "output.json"
@@ -20,7 +20,7 @@ main :: IO ()
 main =
   runResourceT $
   runStderrLoggingT $
-  withODBCConn Nothing connection $
+  withPostgresqlConn connection $
   runSqlConn $ do
     runMigration migrateAll
     selectSource [] [] $$ C.map (JSON.encode :: Entity Person -> _) =$ C.concatMap LBS.toChunks =$ sinkFile outFile

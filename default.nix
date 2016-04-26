@@ -1,6 +1,7 @@
 { mkDerivation, aeson, base, bytestring, conduit, conduit-extra
-, monad-logger, persistent, persistent-odbc, persistent-template
-, resourcet, stdenv, text
+, monad-logger, persistent, persistent-postgresql
+, persistent-template, resourcet, stdenv, text, transformers
+, utf8-string
 }:
 mkDerivation {
   pname = "dumpdb";
@@ -10,7 +11,8 @@ mkDerivation {
   isExecutable = true;
   executableHaskellDepends = [
     aeson base bytestring conduit conduit-extra monad-logger persistent
-    persistent-odbc persistent-template resourcet text
+    persistent-postgresql persistent-template resourcet text
+    transformers utf8-string
   ];
   license = stdenv.lib.licenses.mit;
 }
